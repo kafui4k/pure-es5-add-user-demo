@@ -50,6 +50,8 @@ var myDatabase = [
         parent.innerHTML = '';
         parent.insertAdjacentHTML('afterbegin', template);
 
+        deleteCard();
+
     }
 
     var enterUser = function () {
@@ -92,6 +94,25 @@ var myDatabase = [
             }
         }
         return true
+    }
+
+    var deleteCard = function () {
+        var buttons = document.querySelectorAll('.card-delete');
+
+        function deleteThis(element) {
+            var obj = parseInt(element.getAttribute('data-card'));
+
+            db.splice(obj, 1);
+
+            generateList();
+        }
+
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].addEventListener('click', function (e) {
+                deleteThis(this);
+            });
+            
+        }
     }
 
     init();
